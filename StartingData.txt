@@ -1,6 +1,0 @@
-insert into Songs values ("https://google.com","2021-04-21","Dil mein ho tum");
-insert into Artist values ("He is a nice Singer","2021-04-21","Praful Garg");
-insert into Artist values ("He is a nice Singer too","2021-04-11","A Garg");
-insert into Sing values ("Praful Garg","Dil mein ho tum");
-insert into User values ("abc5@gmail.com","Praful");
-insert into Rate values ("abc5@gmail.com","Dil mein ho tum",5);
