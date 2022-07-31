@@ -12,8 +12,7 @@ function NavBar({user}){
              {user}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
-              <Dropdown.Item href="#" style={{'display':'flex','justifyContent':'center'}}><Button variant="danger">Signout</Button></Dropdown.Item>
+              <Dropdown.Item href="/" style={{'display':'flex','justifyContent':'center'}}><Button variant="danger">Signout</Button></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Container>

@@ -7,19 +7,23 @@ import NavBar from "./NavBar";
 import Rating from "./Rating";
 function Song() {
     const [list, setList] = useState([]);
+    const [artlist, setArtList] = useState([]);
     const location = useLocation();
     useEffect(() => {
         Axios.get("http://localhost:3001/song").then((response) => {
             setList(response.data);
         });
+        Axios.get(`http://localhost:3001/artistForSong`).then((response)=>{
+                   setArtList(response.data);
+                });
     }, []);
     return (
         <div>
-            <NavBar user={location.state.name}/>
+            <NavBar user={location.state.Name}/>
             <Container className='mt-3'>
                 <Row>
                     <Col><h4>Top 10 Songs</h4></Col>
-                    <Col style={{ 'display': 'flex', 'justifyContent': 'end' }}><Link to="/AddSong" state={{Email: location.state.name}}><Button variant="secondary">+ Add Songs</Button></Link></Col>
+                    <Col style={{ 'display': 'flex', 'justifyContent': 'end' }}><Link to="/AddSong" state={{Name: location.state.Name, Id: location.state.Id}}><Button variant="secondary">+ Add Songs</Button></Link></Col>
                 </Row>
             </Container>
             <Container className='mt-3'>
@@ -40,9 +44,15 @@ function Song() {
                             <tr>
                                 <td>{num+1}</td>
                                 <td><Image src='/arijit.jpg' style={{ 'width': 100, 'height': 100 }} /></td>
-                                <td>{items.SName}</td>
+                                <td>{items.Name}</td>
                                 <td>{items.DOR.substring(0,10)}</td>
-                                <td>{items.AName}</td>
+                                {/* <td>{getArtist(items.Id)}</td> */}
+                                <td>{artlist.map((artist) => {
+                                    if(artist.Song_Id===items.Id){
+                                        return artist.Name + ', ';
+                                    }
+                                    return '';
+                                })}</td>
                                 <td>{items.Rating}</td>
                             </tr>
                             );
@@ -50,7 +60,7 @@ function Song() {
                     </tbody>
                 </Table>
             </Container>
-            <Rating user={location.state.name}/>
+            <Rating user={location.state.Id}/> 
         </div>
     );
 }

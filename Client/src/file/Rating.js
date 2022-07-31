@@ -15,9 +15,9 @@ function Rating({user}) {
         const enteredSong = songRef.current.value;
         const enteredRate = rateRef.current.value;
         const data = {
-            SName: enteredSong,
-            Rating: enteredRate,
-            Email: user
+            User_Id: user,
+            Rating: parseInt(enteredRate),
+            Song_Id: parseInt(enteredSong)
         }
         axios.post("http://localhost:3001/rate", data).then((res,err) => {
             if(res.status===200){
@@ -42,7 +42,7 @@ function Rating({user}) {
                             {
                                 song.map((songs) => {
                                     return (
-                                        <option>{songs.SName}</option>
+                                        <option value={songs.Id}>{songs.Name}</option>
                                     );
                                 })
                             }

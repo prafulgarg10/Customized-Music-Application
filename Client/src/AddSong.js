@@ -44,7 +44,7 @@ function AddSong() {
     }
     return (
         <div>
-            <NavBar user={location.state.Email}/>
+            <NavBar user={location.state.Name}/>
             <Container className="mt-3">
                 <h4>Adding a new song</h4>
                 <form action="/add" method="post" onSubmit={clickHandler} className="col-9 mt-3">
@@ -74,7 +74,7 @@ function AddSong() {
                                 {
                                     artist.map((artists) => {
                                         return(
-                                            <option>{artists.AName}</option>
+                                            <option value={artists.Id}>{artists.Name}</option>
                                         );
                                     })
                                 }
