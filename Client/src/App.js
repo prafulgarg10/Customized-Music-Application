@@ -1,19 +1,43 @@
-import Artist from './file/Artist';
-import Song from './file/Song';
-import AddSong from './AddSong';
+import AddSong from "./Component/Song/AddSong";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import User from './file/User';
-import SignUp from './file/SignUp';
+import Login from "./Component/User/Login";
+import SignUp from "./Component/User/SignUp";
+import NotFound from "./Component/PageNotFound/NotFound";
+import { useState } from "react";
+import NavBar from "./Component/Navbar/NavBar";
+import Dashboard from "./Component/Dashboard/Dashboard";
+import AllArtists from "./Component/Artist/AllArtists";
+import Profile from "./Component/User/Profile";
+import UserRatedSongs from "./Component/User/UserRatedSongs";
+
 function App() {
+  const [user, setUser] = useState({});
+
+  function userHandler(user) {
+    setUser(user);
+  }
+
+  function userSignOutHandler() {
+    setUser({});
+  }
+
   return (
     <div>
       <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<User/>}/> 
-        <Route path="/home" element={<div><Song/><Artist/></div>}/>
-        <Route path="/AddSong" element={<AddSong />}/> 
-        <Route path="/signup" element={<div><SignUp/></div>}/>
-      </Routes>
+        <NavBar user={user} setUserOnSignOut={userSignOutHandler} />
+        <Routes>
+          <Route path="/" element={<Login setUser={userHandler} exact />} />
+          <Route path="/signup" element={<SignUp setUser={userHandler} />} />
+          <Route path="/dashboard" element={<Dashboard user={user} />} />
+          <Route path="/AddSong" element={<AddSong />} />
+          <Route path="/artists" element={<AllArtists />} />
+          <Route
+            path="/profile"
+            element={<Profile user={user} updateUserOnDelete={setUser} />}
+          />
+          <Route path="/userrating" element={<UserRatedSongs user={user} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

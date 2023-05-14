@@ -135,6 +135,7 @@ CREATE TABLE `User` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Email` varchar(20) DEFAULT NULL,
   `Name` char(20) DEFAULT NULL,
+  `Contact` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -146,7 +147,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'abc@gmail.com','Praful');
+INSERT INTO `User` VALUES (1,'abc@gmail.com','Praful','10000');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
