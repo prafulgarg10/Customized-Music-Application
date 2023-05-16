@@ -17,17 +17,21 @@ function Login({ setUser }) {
       Name: enteredName,
     };
 
-    Axios.post("http://localhost:3001/login", user).then((res) => {
-      if (res.data.length === 0) {
-        document.getElementById("feed").innerHTML +=
-          "User doesn't exist, Please sign up";
-        event.target.reset();
-      } else {
-        user.Id = res.data[0]?.Id;
-        setUser(user);
-        navigate("/dashboard");
-      }
-    });
+    Axios.post("http://localhost:3001/login", user)
+      .then((res) => {
+        if (res.data.length === 0) {
+          document.getElementById("feed").innerHTML +=
+            "User doesn't exist, Please sign up";
+          event.target.reset();
+        } else {
+          user.Id = res.data[0]?.Id;
+          setUser(user);
+          navigate("/dashboard");
+        }
+      })
+      .catch((err) => {
+        navigate("/server-error");
+      });
   }
 
   return (

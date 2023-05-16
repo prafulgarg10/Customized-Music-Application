@@ -9,6 +9,7 @@ import Dashboard from "./Component/Dashboard/Dashboard";
 import AllArtists from "./Component/Artist/AllArtists";
 import Profile from "./Component/User/Profile";
 import UserRatedSongs from "./Component/User/UserRatedSongs";
+import ServerError from "./Component/ServerError/ServerError";
 
 function App() {
   const [user, setUser] = useState({});
@@ -36,6 +37,7 @@ function App() {
             element={<Profile user={user} updateUserOnDelete={setUser} />}
           />
           <Route path="/userrating" element={<UserRatedSongs user={user} />} />
+          <Route path="/server-error" element={<ServerError />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

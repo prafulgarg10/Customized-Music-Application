@@ -16,16 +16,16 @@ function Profile({ user, updateUserOnDelete }) {
   }, []);
 
   function deleteUserHandler() {
-    Axios.delete(`http://localhost:3001/deleteuser?Id=${user?.Id}`).then(
-      (response) => {
+    Axios.delete(`http://localhost:3001/deleteuser?Id=${user?.Id}`)
+      .then((response) => {
         if (response.status === 200) {
           updateUserOnDelete({});
           navigate("/");
         } else {
           console.log("error");
         }
-      }
-    );
+      })
+      .catch((err) => navigate("/server-error"));
   }
 
   return (

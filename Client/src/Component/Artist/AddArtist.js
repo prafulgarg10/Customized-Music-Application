@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { Container } from "react-bootstrap";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AddArtist({ artistInserted }) {
   const nameRef = useRef();
   const dateRef = useRef();
   const bioRef = useRef();
+  const navigate = useNavigate();
 
   function clickHandlerArtist(event) {
     event.preventDefault();
@@ -27,20 +29,21 @@ function AddArtist({ artistInserted }) {
         document.getElementById("feed_a").style.color = "lightgreen";
         document.getElementById("feed_a").innerHTML = "Enter valid Bio";
       } else {
-        Axios.post("http://localhost:3001/addArtist", addData).then(
-          (res) => {
+        Axios.post("http://localhost:3001/addArtist", addData)
+          .then((res) => {
             if (res.status === 200) {
               artistInserted(true);
               document.getElementById("feed_a").style.color = "green";
               document.getElementById("feed_a").innerHTML =
                 addData.Name + " added successfully";
+            } else {
+              document.getElementById("feed_a").style.color = "red";
+              document.getElementById("feed_a").innerHTML = "Server error";
             }
-          },
-          (err) => {
-            document.getElementById("feed_a").style.color = "red";
-            document.getElementById("feed_a").innerHTML = "Server error";
-          }
-        );
+          })
+          .catch((err) => {
+            navigate("/server-error");
+          });
       }
     }
   }

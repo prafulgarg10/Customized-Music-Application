@@ -20,21 +20,25 @@ function SignUp({ setUser }) {
       Contact: enteredContactNo,
     };
 
-    Axios.post("http://localhost:3001/signup", user).then((res) => {
-      if (res.data === "") {
-        document.getElementById("feed").innerHTML +=
-          "Email already exist! Please login";
-        event.target.reset();
-      } else {
-        setUser({
-          Email: enteredEmail,
-          Name: enteredName,
-          Id: res.data[0]?.Id,
-        });
+    Axios.post("http://localhost:3001/signup", user)
+      .then((res) => {
+        if (res.data === "") {
+          document.getElementById("feed").innerHTML +=
+            "Email already exist! Please login";
+          event.target.reset();
+        } else {
+          setUser({
+            Email: enteredEmail,
+            Name: enteredName,
+            Id: res.data[0]?.Id,
+          });
 
-        navigate("/dashboard");
-      }
-    });
+          navigate("/dashboard");
+        }
+      })
+      .catch((err) => {
+        navigate("/server-error");
+      });
   }
 
   return (

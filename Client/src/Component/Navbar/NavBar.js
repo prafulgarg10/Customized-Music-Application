@@ -25,7 +25,7 @@ function NavBar({ user, setUserOnSignOut }) {
         <Navbar bg="dark" variant="dark" style={{ height: "80px" }}>
           <Container>
             <Link to="/" class="navbar-brand">
-              Spotify
+              Customized Music
             </Link>
             <Nav className="me-auto">
               <Link to="/dashboard" class="nav-link">
@@ -80,7 +80,7 @@ function NavBar({ user, setUserOnSignOut }) {
           <Container>
             {/* <Navbar.Brand href="/">Spotify</Navbar.Brand> */}
             <Link to="/" class="navbar-brand">
-              Spotify
+              Customized Music
             </Link>
             <Navbar.Collapse className="justify-content-end">
               {/* <Nav.Link href="/">Login</Nav.Link>
